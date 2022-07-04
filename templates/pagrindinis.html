@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Pajamų sąrašas (<a href = "{{ url_for('new') }}">Įvesti pajamas</a>)</h3>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+        {% endif %}
+        {% endwith %}
+
+        <table class="table">
+         <thead>
+            <tr>
+               <th>Data</th> <th>Klientas</th> <th>Suma</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for skaiciuokle in skaiciuokle %}
+               <tr>
+                   <td>{{ skaiciuokle.data }}</td>
+                  <td>{{ skaiciuokle.vardas }}</td>
+                  <td>€{{ skaiciuokle.pajamos }}</td>
+
+                       <td><form method="post" action="{{ url_for('delete', id=skaiciuokle.id) }}">
+    <input class="btn" type="submit" name="delete" value="Pašalinti">
+                   </form>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+{%endblock%}

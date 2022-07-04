@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
+<p></p>
+<form action = "{{ request.path }}" method = "post">
+
+          <label for = "data">Data </label><br>
+         <input type= "date" name="data" placeholder="YYYY-DD-MM" /><br>
+
+          <label for = "vardas">Klientas </label><br>
+         <input type = "text" name = "vardas" placeholder = "klientas" /><br>
+
+          <label for = "pajamos">Suma</label><br>
+          <input type = "text" name = "pajamos" placeholder = "suma" /><br>
+
+          <input type = "submit" value = "Įvesti" />
+      </form>
+
+{%endblock%}
